@@ -16,10 +16,18 @@ producer = KafkaProducer(
 
 @app.route('/')
 def index():
+    """
+    Root endpoint to check if the service is running.
+    """
     return "Welcome to the Flask Kafka producer!"
+
 
 @app.route('/produce', methods=['POST'])
 def produce_message():
+    """
+    Endpoint to produce a message to Kafka.
+    Expects JSON data in the request body.
+    """
     try:
         # Get JSON data from request
         data = request.json
@@ -34,5 +42,4 @@ def produce_message():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+
